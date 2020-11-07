@@ -37,5 +37,5 @@ evaluate("isUndefined(a)", params); // -> false
 evaluate("isUndefined(notDefined)", params); // -> true
 
 // It works also with infinite nested conditions
-evaluate("(isUndefined(notDefined) || (isGreater(c, a) && isLower(b, c)) && isEqual(a,1)", params); // -> true
+evaluate("(isUndefined(notDefined) || (isGreater(c, a) && isLower(b, c))) && isEqual(a,1)", params); // -> true
 ```
