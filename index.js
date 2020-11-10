@@ -2,7 +2,8 @@
 // RegEx to find  parameters, comments and arguments
 //**************************************************************
 const FUNC_PARAMS_SIMPLE = /\b\w+(\b(?!\())/g;
-const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\())[\"|\']?/;
+//const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\())[\"|\']?/;
+const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\())\b[\"|\']?/g;
 const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/gm;
 const ARGUMENT_NAMES = /([^\s,]+)/g;
 
@@ -17,7 +18,7 @@ function getParamNames(func) {
 }
 
 //**************************************************************
-// Returns labda function body
+// Returns lambda function body
 //**************************************************************
 function getLambdaBody(func) {
   const fnStr = func.toString().replace(STRIP_COMMENTS, "");
@@ -28,7 +29,7 @@ function getLambdaBody(func) {
 // Wrap a param in a try-catch to handle undefined params
 //**************************************************************
 const makeSafeParam = (param, undef) => {
-  console.log(param.toString());
+  console.log("PARAM", param);
   const wrap = `(() => {
       try {
         return ${param} !== undefined ? ${param} : ${undef};
@@ -36,7 +37,7 @@ const makeSafeParam = (param, undef) => {
         return ${undef};
       }
     })()`;
-  //console.log("param", param, wrap);
+
   return wrap;
 };
 
@@ -54,8 +55,6 @@ const evaluate = (body, params, undef) => {
   const input = `{${Object.keys(params)
     .map((k) => k)
     .join(",")}}`;
-
-  console.log(makeSafe(body, undef));
 
   const func = new Function(input, `return ${makeSafe(body, undef)}`);
   return func(params);
