@@ -2,7 +2,6 @@
 // RegEx to find  parameters, comments and arguments
 //**************************************************************
 const FUNC_PARAMS_SIMPLE = /\b\w+(\b(?!\())/g;
-//const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\())[\"|\']?/;
 const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\())\b[\"|\']?/g;
 const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/gm;
 const ARGUMENT_NAMES = /([^\s,]+)/g;
@@ -29,7 +28,6 @@ function getLambdaBody(func) {
 // Wrap a param in a try-catch to handle undefined params
 //**************************************************************
 const makeSafeParam = (param, undef) => {
-  console.log("PARAM", param);
   const wrap = `(() => {
       try {
         return ${param} !== undefined ? ${param} : ${undef};
