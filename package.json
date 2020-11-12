@@ -4,12 +4,12 @@
   "description": "Small library to dynamically create and evaluate expression with multiple parameters (even undefined)",
   "main": "index.js",
   "scripts": {
-    "test": "nyc ava test/*.js && nyc report",
+    "test": "nyc ava test/*.js && nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov && codecov"
+      "pre-commit": "nyc npm test"
     }
   },
   "repository": {
