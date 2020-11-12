@@ -1,6 +1,6 @@
 {
   "name": "safe-evaluate-expression",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Small library to dynamically create and evaluate expression with multiple parameters (even undefined)",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "commit": "git add . && git-cz",
     "version": "standard-version",
     "push": "git push --follow-tags",
-    "release": "npm run commit && npm run version && npm run push"
+    "release": "npm run test && npm run commit && npm run version && npm run push"
   },
   "husky": {
     "hooks": {
