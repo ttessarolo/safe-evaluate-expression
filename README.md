@@ -1,5 +1,12 @@
 # safe-evaluate-expression
 
+![NPM](https://img.shields.io/npm/v/safe-evaluate-expression/latest)
+![NPM](https://img.shields.io/npm/dw/safe-evaluate-expression)
+![NPM](https://img.shields.io/npm/l/safe-evaluate-expression)
+![Codecov](https://img.shields.io/codecov/c/gh/ttessarolo/safe-evaluate-expression)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/safe-evaluate-expression)
+![NPM](https://img.shields.io/badge/4R3S-PR0DUCT10N-yellowgreen)
+
 Small library to dynamically create and evaluate expression with multiple parameters (even undefined). **To handle more sofisticate use cases is provided a [Factory](#factory) functionality to build evaluate functions with some spice 🔥**.
 
 _It also offer an ancillary function to protect lambda function to undefined params inputs._
@@ -52,6 +59,33 @@ evaluate("(isUndefined(notDefined) || (isGreater(c, a) && isLower(b, c))) && isE
 
 ### _factory(options:[Object]) -> [evaluate function]_
 
+## Example
+
+```javascript
+const { factory, operators } = require("safe-evaluate-expression");
+const evaluate = factory({ operators, multipleParams: true, translateLogical: true });
+
+const metadata = { x: 1.1, y: 2 };
+const list = { k: 3, z: 4 };
+const map = new Map([["pi", 3.14]]);
+
+const expression1 = "isLower(x,z)";
+const expression2 = "isLower(k,y)";
+
+evaluate(expression1, metadata, list); // -> true
+evaluate(expression2, metadata, list); // -> false
+evaluate(`${expression1} AND ${expression2}`, metadata, list); // -> false
+evaluate(`${expression1} OR ${expression2}`, metadata, list); // -> true
+
+const expression3 = "isLower(notDefined,z)"; // put a not defined value
+
+evaluate(expression3, metadata, list);
+evaluate(`${expression3} AND ${expression2}`, metadata, list); // -> false
+evaluate(`(isLower(x,z) AND isLower(k,y) OR (isLower(z,P) AND NOT isLower(P,k)))`, metadata, list);
+
+evaluate(`isLower(z,pi)`, metadata, list, map); // -> false
+```
+
 ## Factory Params
 
 <table>
@@ -95,33 +129,6 @@ evaluate("(isUndefined(notDefined) || (isGreater(c, a) && isLower(b, c))) && isE
   <td style="vertical-align:top">undefined</td>
 </tr>
 </table>
-
-## Factory Example
-
-```javascript
-const { factory, operators } = require("safe-evaluate-expression");
-const evaluate = factory({ operators, multipleParams: true, translateLogical: true });
-
-const metadata = { x: 1.1, y: 2 };
-const list = { k: 3, z: 4 };
-const map = new Map([["pi", 3.14]]);
-
-const expression1 = "isLower(x,z)";
-const expression2 = "isLower(k,y)";
-
-evaluate(expression1, metadata, list); // -> true
-evaluate(expression2, metadata, list); // -> false
-evaluate(`${expression1} AND ${expression2}`, metadata, list); // -> false
-evaluate(`${expression1} OR ${expression2}`, metadata, list); // -> true
-
-const expression3 = "isLower(notDefined,z)"; // put a not defined value
-
-evaluate(expression3, metadata, list);
-evaluate(`${expression3} AND ${expression2}`, metadata, list); // -> false
-evaluate(`(isLower(x,z) AND isLower(k,y) OR (isLower(z,P) AND NOT isLower(P,k)))`, metadata, list);
-
-evaluate(`isLower(z,pi)`, metadata, list, map); // -> false
-```
 
 # Safe Lambda
 

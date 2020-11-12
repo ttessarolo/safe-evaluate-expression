@@ -15,8 +15,8 @@ evaluate(`${expression1} OR ${expression2}`, metadata, list); // -> true
 
 const expression3 = "isLower(notDefined,z)"; // put a not defined value
 
-evaluate(expression3, metadata, list);
+evaluate(expression3, metadata, list); // -> false
 evaluate(`${expression3} AND ${expression2}`, metadata, list); // -> false
-evaluate(`(isLower(x,z) AND isLower(k,y) OR (isLower(z,P) AND NOT isLower(P,k)))`, metadata, list);
+evaluate(`(isLower(x,z) AND isLower(k,y) OR (isLower(z,P) AND NOT isLower(P,k)))`, metadata, list); //-> false
 
 evaluate(`isLower(z,pi)`, metadata, list, map); // -> false
