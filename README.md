@@ -7,7 +7,7 @@
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/safe-evaluate-expression)
 ![NPM](https://img.shields.io/badge/4R3S-PR0DUCT10N-magenta)
 
-Small library to dynamically create and evaluate expression with multiple parameters (even undefined). **To handle more sofisticate use cases is provided a [Factory](#factory) functionality to build evaluate functions with some spice 🔥**.
+Small library to dynamically create and evaluate expression with multiple parameters (even undefined). **To handle more sofisticate use cases is provided a [Factory](#factory) functionality to build evaluate functions with some spice 🔥**
 
 _It also offer an ancillary function to protect lambda function to undefined params inputs._
 
@@ -24,8 +24,8 @@ npm install safe-evaluate-expression
 ## Example
 
 ```javascript
-const evaluate = require("safe-evaluate-expression");
-evaluate("a > 1", { a: 3 }); // -> true
+const evaluate = require('safe-evaluate-expression');
+evaluate('a > 1', { a: 3 }); // -> true
 ```
 
 _NB. As constant params in expression you can use only string and integers (eg. 1, "a") no floating numbers!_
@@ -33,7 +33,7 @@ _NB. As constant params in expression you can use only string and integers (eg. 
 ## Advanced Example
 
 ```javascript
-const evaluate = require("safe-evaluate-expression");
+const evaluate = require('safe-evaluate-expression');
 
 const operators = {
   isUndefined: (x) => x === undefined,
@@ -45,14 +45,14 @@ const operators = {
 const vars = { a: 1, b: 1, c: 2 };
 const params = { ...vars, ...operators };
 
-evaluate("isEqual(a,b)", params); // -> true
-evaluate("isEqual(a,c)", params); // -> false
-evaluate("isEqual(a,notDefined)", params); // -> false
-evaluate("isUndefined(a)", params); // -> false
-evaluate("isUndefined(notDefined)", params); // -> true
+evaluate('isEqual(a,b)', params); // -> true
+evaluate('isEqual(a,c)', params); // -> false
+evaluate('isEqual(a,notDefined)', params); // -> false
+evaluate('isUndefined(a)', params); // -> false
+evaluate('isUndefined(notDefined)', params); // -> true
 
 // It works also with infinite nested conditions
-evaluate("(isUndefined(notDefined) || (isGreater(c, a) && isLower(b, c))) && isEqual(a,1)", params); // -> true
+evaluate('(isUndefined(notDefined) || (isGreater(c, a) && isLower(b, c))) && isEqual(a,1)', params); // -> true
 ```
 
 # Factory
@@ -62,22 +62,22 @@ evaluate("(isUndefined(notDefined) || (isGreater(c, a) && isLower(b, c))) && isE
 ## Example
 
 ```javascript
-const { factory, operators } = require("safe-evaluate-expression");
+const { factory, operators } = require('safe-evaluate-expression');
 const evaluate = factory({ operators, multipleParams: true, translateLogical: true });
 
 const metadata = { x: 1.1, y: 2 };
 const list = { k: 3, z: 4 };
-const map = new Map([["pi", 3.14]]);
+const map = new Map([['pi', 3.14]]);
 
-const expression1 = "isLower(x,z)";
-const expression2 = "isLower(k,y)";
+const expression1 = 'isLower(x,z)';
+const expression2 = 'isLower(k,y)';
 
 evaluate(expression1, metadata, list); // -> true
 evaluate(expression2, metadata, list); // -> false
 evaluate(`${expression1} AND ${expression2}`, metadata, list); // -> false
 evaluate(`${expression1} OR ${expression2}`, metadata, list); // -> true
 
-const expression3 = "isLower(notDefined,z)"; // put a not defined value
+const expression3 = 'isLower(notDefined,z)'; // put a not defined value
 
 evaluate(expression3, metadata, list);
 evaluate(`${expression3} AND ${expression2}`, metadata, list); // -> false
@@ -87,6 +87,8 @@ evaluate(`isLower(z,pi)`, metadata, list, map); // -> false
 ```
 
 ## Factory Params
+
+The Factory used without parameters gives the same results as the "evaluate" function. However, it is possible to create new "evaluate" functions with much more spice by setting the Factory parameters correctly. All parameters are optional. The parameter "multipleParams" allows you to pass various objects (or Maps) to the evaluation function, thus avoiding the need to deconstruct operators and values in a single object. It is important to remember that the parameter "operators", if specified, must contain an object with all the functions you want to define as operators. This object can be plugged in-scope within the evaluation function to optimise performance. However, if the "operators" functions depend on the external libraries, you should not set the "operatorsInScope" functionality.
 
 <table>
 <tr>
@@ -137,7 +139,7 @@ evaluate(`isLower(z,pi)`, metadata, list, map); // -> false
 Protect lambda function by assigning a default value for undefined input paramters.
 
 ```javascript
-const { safeLambda } = require("safe-evaluate-expression");
+const { safeLambda } = require('safe-evaluate-expression');
 
 const lambda = (a, b, c) => a + b + c;
 const protectedLambda = safeLambda(lambda, 0);
