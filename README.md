@@ -5,7 +5,7 @@
 ![NPM](https://img.shields.io/npm/l/safe-evaluate-expression)
 ![Codecov](https://img.shields.io/codecov/c/gh/ttessarolo/safe-evaluate-expression)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/safe-evaluate-expression)
-![NPM](https://img.shields.io/badge/4R3S-PR0DUCT10N-yellowgreen)
+![NPM](https://img.shields.io/badge/4R3S-PR0DUCT10N-magenta)
 
 Small library to dynamically create and evaluate expression with multiple parameters (even undefined). **To handle more sofisticate use cases is provided a [Factory](#factory) functionality to build evaluate functions with some spice 🔥**.
 

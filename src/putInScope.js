@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = (obj, varType = "const") => {
   const scope = [];
   for (const [key, val] of Object.entries(obj)) {

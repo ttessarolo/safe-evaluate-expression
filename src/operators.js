@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = {
   isUndefined: (x) => x === undefined,
   isNull: (x) => x === null,

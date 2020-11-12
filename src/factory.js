@@ -1,3 +1,5 @@
+"use strict";
+
 const putInScope = require("./putInScope");
 
 // const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\())\b[\"|\']?/g;
@@ -60,13 +62,13 @@ function evaluateFactory({
       undef
     );
 
-    const arguments = multipleParams ? args : args[0] || {};
+    const argomenti = multipleParams ? args : args[0] || {};
     const input = multipleParams
       ? "args, _"
-      : `{${(arguments.keys ? arguments.keys() : Object.keys(arguments)).map((k) => k).join(",")}}`;
+      : `{${(argomenti.keys ? argomenti.keys() : Object.keys(argomenti)).map((k) => k).join(",")}}`;
 
     const func = new Function(input, `${operatorsScoped} \n\n return ${condition}`);
-    return func(arguments, operators);
+    return func(argomenti, operators);
   };
 }
 

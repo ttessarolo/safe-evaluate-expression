@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "ava test/*.js",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "commit": "git add . && git-cz",
+    "version": "standard-version",
+    "push": "git push --follow-tags",
+    "release": "npm run commit && npm run version && npm run push"
   },
   "husky": {
     "hooks": {
@@ -34,7 +38,23 @@
   "devDependencies": {
     "ava": "^3.13.0",
     "codecov": "^3.8.1",
+    "commitizen": "^4.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.0.0",
     "husky": "^4.3.0",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "standard-version": "^9.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

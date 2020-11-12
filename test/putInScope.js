@@ -1,7 +1,7 @@
 const test = require("ava");
 const { putInScope, operators } = require("../");
 
-console.log(putInScope(operators));
+//console.log(putInScope(operators));
 
 const expected = `const isUndefined = (x) => x === undefined;
 const isNull = (x) => x === null;
