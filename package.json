@@ -9,7 +9,6 @@
     "commit": "git add . && git-cz",
     "version": "standard-version",
     "push": "git push --follow-tags",
-    "publish": "npm publish",
     "release": "npm run test && npm run commit && npm run version && npm run push && npm publish"
   },
   "husky": {
