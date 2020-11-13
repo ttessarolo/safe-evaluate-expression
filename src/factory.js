@@ -1,12 +1,13 @@
-"use strict";
+'use strict';
 
-const putInScope = require("./putInScope");
+const putInScope = require('./putInScope');
 
 // const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\())\b[\"|\']?/g;
-const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\(|\.))\b[\"|\']?/g;
+// const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\(|\.))\b[\"|\']?/g;
+const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)\w+\b)/g;
 const OPERA_EXT = /\b\w+(\w(\())/g;
 const prefixOperators = (str) => str.replace(OPERA_EXT, (o) => `_.${o}`);
-const strip = (p) => p.replace(/"/g, "");
+const strip = (p) => p.replace(/"/g, '');
 
 //**************************************************************
 // Wrap a param in a try-catch to handle undefined params
@@ -46,7 +47,7 @@ function evaluateFactory({
   undef,
 } = {}) {
   return (expression, ...args) => {
-    let operatorsScoped = "";
+    let operatorsScoped = '';
     let condition = expression;
 
     if (operatorsInScope) operatorsScoped = putInScope(operators);
@@ -55,17 +56,17 @@ function evaluateFactory({
     condition = makeSafe(
       translateLogical
         ? condition
-            .replace(/ (AND|and) /g, " && ")
-            .replace(/ (OR|or) /g, " || ")
-            .replace(/(NOT|not) /g, "!")
+            .replace(/ (AND|and) /g, ' && ')
+            .replace(/ (OR|or) /g, ' || ')
+            .replace(/(NOT|not) /g, '!')
         : condition,
       undef
     );
 
     const argomenti = multipleParams ? args : args[0] || {};
     const input = multipleParams
-      ? "args, _"
-      : `{${(argomenti.keys ? argomenti.keys() : Object.keys(argomenti)).map((k) => k).join(",")}}`;
+      ? 'args, _'
+      : `{${(argomenti.keys ? argomenti.keys() : Object.keys(argomenti)).map((k) => k).join(',')}}`;
 
     const func = new Function(input, `${operatorsScoped} \n\n return ${condition}`);
     return func(argomenti, operators);
