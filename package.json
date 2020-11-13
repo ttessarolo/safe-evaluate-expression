@@ -1,6 +1,6 @@
 {
   "name": "safe-evaluate-expression",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Small library to dynamically create and evaluate expression with multiple parameters (even undefined)",
   "main": "index.js",
   "scripts": {
