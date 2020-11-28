@@ -10,5 +10,5 @@
         "prettier/prettier": [
             "error"
         ]
-    },
+    }
 }

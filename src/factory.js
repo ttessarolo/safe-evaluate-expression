@@ -74,3 +74,5 @@ function evaluateFactory({
 }
 
 module.exports = evaluateFactory;
+module.exports.FUNC_PARAMS = FUNC_PARAMS;
+module.exports.OPERA_EXT = OPERA_EXT;
