@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.1.4%0Dv1.2.0) (2020-11-28)
+
+
+### Features
+
+* add complextToBasic and basicToComples condition converter ([d4062f7](https://github.com/ttessarolo/safe-evaluate-expression/commits/d4062f74c67b24ba0f95fe6a121b50bffac99df2))
+
 ### [1.1.4](https://github.com/ttessarolo/safe-evaluate-expression/compare/v1.1.3...v1.1.4) (2020-11-13)
 
 
