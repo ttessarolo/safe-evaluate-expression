@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.2.0%0Dv1.3.0) (2020-11-29)
+
+
+### Features
+
+* support pseudo JSONLogic syntaxt for expressions ([cb38b13](https://github.com/ttessarolo/safe-evaluate-expression/commits/cb38b13da8936b4c0e4b0b55f01061e47d6bf459))
+
 ## [1.2.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.1.4%0Dv1.2.0) (2020-11-28)
 
 
