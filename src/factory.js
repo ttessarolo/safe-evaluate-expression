@@ -1,6 +1,7 @@
 'use strict';
 
 const putInScope = require('./putInScope');
+const complexToBasic = require('./complexToBasic');
 
 // const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\())\b[\"|\']?/g;
 // const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\(|\.))\b[\"|\']?/g;
@@ -47,11 +48,12 @@ function evaluateFactory({
   undef,
 } = {}) {
   return (expression, ...args) => {
+    const exp = typeof expression === 'string' ? expression : complexToBasic(expression);
     let operatorsScoped = '';
-    let condition = expression;
+    let condition = exp;
 
     if (operatorsInScope) operatorsScoped = putInScope(operators);
-    if (multipleParams) condition = prefixOperators(expression);
+    if (multipleParams) condition = prefixOperators(exp);
 
     condition = makeSafe(
       translateLogical

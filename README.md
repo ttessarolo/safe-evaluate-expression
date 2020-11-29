@@ -7,7 +7,10 @@
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/safe-evaluate-expression)
 ![NPM](https://img.shields.io/badge/4R3S-PR0DUCT10N-magenta)
 
-Small library to dynamically create and evaluate expression with multiple parameters (even undefined). **To handle more sofisticate use cases is provided a [Factory](#factory) functionality to build evaluate functions with some spice 🔥**
+Small library to dynamically create and evaluate expression with multiple parameters (even undefined).
+
+- 🔥 To handle more sofisticate use cases is provided a [Factory](#factory) functionality to build evaluate functions with some spice
+- 🧬 You can also use pseudo [JsonLogic](https://jsonlogic.com/) syntax to write expressions.
 
 _It also offer an ancillary function to protect lambda function to undefined params inputs._
 
@@ -19,13 +22,28 @@ npm install safe-evaluate-expression
 
 # Evaluate
 
-### _evaluate(expression:[String], params:[Object]) -> [expression evaluated]_
+### _evaluate(expression:[String | Object], params:[Object]) -> [expression evaluated]_
 
 ## Example
 
 ```javascript
 const evaluate = require('safe-evaluate-expression');
+
+// Using Simple Text Expression
 evaluate('a > 1', { a: 3 }); // -> true
+
+// Using Pseudo JSONLogic Expression
+evaluate(
+  {
+    and: [
+      {
+        operator: 'isLower',
+        values: [{ value: 1 }, { value: 'a' }],
+      },
+    ],
+  },
+  { a: 3 }
+); // --> true
 ```
 
 _NB. As constant params in expression you can use only string and integers (eg. 1, "a") no floating numbers!_
@@ -71,19 +89,37 @@ const map = new Map([['pi', 3.14]]);
 
 const expression1 = 'isLower(x,z)';
 const expression2 = 'isLower(k,y)';
+const expression3 = 'isLower(notDefined,z)'; // put a not defined value
+
+const pseudoJSONLogic = {
+  and: [
+    { operator: '!isEmpty', values: [{ value: '"lorem"' }] },
+    {
+      or: [
+        {
+          operator: 'isEqual',
+          values: [{ value: 'x' }, { value: '"x"' }],
+        },
+        {
+          operator: 'isLower',
+          values: [{ value: '3' }, { value: '4' }],
+        },
+      ],
+    },
+  ],
+};
 
 evaluate(expression1, metadata, list); // -> true
 evaluate(expression2, metadata, list); // -> false
 evaluate(`${expression1} AND ${expression2}`, metadata, list); // -> false
 evaluate(`${expression1} OR ${expression2}`, metadata, list); // -> true
 
-const expression3 = 'isLower(notDefined,z)'; // put a not defined value
-
 evaluate(expression3, metadata, list);
 evaluate(`${expression3} AND ${expression2}`, metadata, list); // -> false
 evaluate(`(isLower(x,z) AND isLower(k,y) OR (isLower(z,P) AND NOT isLower(P,k)))`, metadata, list);
 
 evaluate(`isLower(z,pi)`, metadata, list, map); // -> false
+evaluate(pseudoJSONLogic, metadata, list, map); // -> true
 ```
 
 ## Factory Params

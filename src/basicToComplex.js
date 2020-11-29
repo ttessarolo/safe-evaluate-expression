@@ -1,34 +1,56 @@
-const { OPERA_EXT, FUNC_PARAMS } = require('./factory');
+const { FUNC_PARAMS } = require('./factory');
 
-function basicToComplex(rule, chain = [], logical) {
-  if (rule === '*') {
-    return [
-      {
-        operator: '*',
-        values: [],
-      },
-    ];
+const matchOR = /([^\s]+)OR([^\s]+)/g;
+
+function getType(value) {
+  if (!isNaN(value)) return 'number';
+  if (typeof value === 'boolean') return 'boolean';
+  if (new Date(value).toString() !== 'Invalid Date') return 'date';
+  if (value.includes("'") || value.includes('"')) return 'string';
+  return 'metadata';
+}
+
+function compose(rule) {
+  rule = rule.replace(/not /g, '!').trim();
+  const operator = rule.substring(0, rule.indexOf('('));
+  const values = rule.match(FUNC_PARAMS).map((value) => ({ value, type: getType(value) }));
+
+  return { operator, values };
+}
+
+function extract(rule) {
+  rule = rule.replace(/not /g, '!').trim();
+  const ors = new Set();
+  const ands = new Set();
+  const newRule = rule.replace(/ OR /g, 'OR');
+  const matched = newRule.match(matchOR);
+  if (matched) {
+    matched.forEach((m) => {
+      m.split('OR').forEach((or) => ors.add(or));
+    });
   }
 
-  const and = rule.indexOf(' AND ');
-  const or = rule.indexOf(' OR ');
-  const not = rule.indexOf('not ') > -1;
-  const index = and > 0 ? and : 0 || or > 0 ? or : 0 || rule.length;
+  newRule
+    .replace(matchOR, '')
+    .split(' AND ')
+    .forEach((and) => and && ands.add(and));
 
-  const prefix = rule
-    .substring(0, index)
-    .trim()
-    .replace(/(NOT|not) /g, '');
-  const rest = rule.substring(index + 4).trim();
-  let operator = prefix.match(OPERA_EXT)[0];
-  operator = `${not ? '!' : ''}${operator.substring(0, operator.length - 1)}`;
+  return [[...ors].map((or) => compose(or)), [...ands].map((and) => compose(and))];
+}
 
-  const values = prefix.match(FUNC_PARAMS).map((value) => ({ value, type: 'string' }));
-  chain.push({ logical, operator, values });
+function basicToComplex(rule) {
+  if (rule === '*') {
+    return { and: [{ operator: '*', values: [] }] };
+  }
 
-  if (rest) basicToComplex(rest, chain, and > -1 ? '&&' : '||');
+  const [ors, ands] = extract(rule);
 
-  return chain;
+  if (ors.length > 0 && ands.length > 0) {
+    return { and: [...ands, { or: ors }] };
+  }
+
+  if (ands.length > 0) return { and: ands };
+  if (ors.length > 0) return { or: ors };
 }
 
 module.exports = basicToComplex;

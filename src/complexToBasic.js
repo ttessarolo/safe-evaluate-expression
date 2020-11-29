@@ -1,18 +1,13 @@
-function complexToBasic(rule, logical) {
-  if (rule[0].operator === '*') return '*';
-
-  const result = `${logical ? `${logical} ` : ''}(${rule
-    .map((r) => {
-      const and = r.and && r.and.length > 0 ? complexToBasic(r.and, ' &&') : '';
-      const or = r.or && r.or.length > 0 ? complexToBasic(r.or, ' ||') : '';
-
-      return `${r.logical ? `${r.logical} ` : ''}${r.operator}(${r.values
-        .map((v) => v.value)
-        .join(',')})${and}${or}`;
+function complexToBasic(rule) {
+  const result = (rule.and || rule.or)
+    .map((sub) => {
+      if (sub.operator === '*') return '*';
+      if (sub.and || sub.or) return complexToBasic(sub);
+      return `${sub.operator}(${sub.values.map((v) => v.value).join(', ')})`;
     })
-    .join(' ')})`;
+    .join(rule.and ? ' && ' : ' || ');
 
-  return result;
+  return result === '*' ? '*' : `(${result})`;
 }
 
 module.exports = complexToBasic;

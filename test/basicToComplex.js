@@ -4,71 +4,317 @@ const { basicToComplex } = require('../');
 const basic0 = `*`;
 const basic1 = `not isEmpty("a","b")`;
 const basic2 = `not isEmpty("a","b") AND isEqual("c","d")`;
-const basic3 = `not isEmpty("a","b") AND isEqual("c","d") OR isEqual("e","f")`;
+const basic3 = `not isEmpty("a","b") OR isEqual("c","d") OR isEqual("e","f") AND isEqual("k","z")`;
+const basic4 = `not isEmpty("a","b") OR isEqual("c","d") OR isEqual("e","f") OR isEqual("k","z")`;
+const basic5 = `not isEmpty("a","b") AND isEqual("c","d") AND isEqual("e","f") AND isEqual("k","z")`;
+const basic6 = `not isEmpty("a","b") AND isEqual("c","d") OR isEqual("e","f") AND isEqual("k","z")`;
 
-const c0 = [
-  {
-    operator: '*',
-    values: [],
-  },
-];
+const c3 = {
+  and: [
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: '"k"',
+          type: 'string',
+        },
+        {
+          value: '"z"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      or: [
+        {
+          operator: '!isEmpty',
+          values: [
+            {
+              value: '"a"',
+              type: 'string',
+            },
+            {
+              value: '"b"',
+              type: 'string',
+            },
+          ],
+        },
+        {
+          operator: 'isEqual',
+          values: [
+            {
+              value: '"c"',
+              type: 'string',
+            },
+            {
+              value: '"d"',
+              type: 'string',
+            },
+          ],
+        },
+        {
+          operator: 'isEqual',
+          values: [
+            {
+              value: '"e"',
+              type: 'string',
+            },
+            {
+              value: '"f"',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
-const c1 = [
-  {
-    logical: undefined,
-    operator: '!isEmpty',
-    values: [
-      { type: 'string', value: '"a"' },
-      { type: 'string', value: '"b"' },
-    ],
-  },
-];
+const c6 = {
+  and: [
+    {
+      operator: '!isEmpty',
+      values: [
+        {
+          value: '"a"',
+          type: 'string',
+        },
+        {
+          value: '"b"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: '"k"',
+          type: 'string',
+        },
+        {
+          value: '"z"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      or: [
+        {
+          operator: 'isEqual',
+          values: [
+            {
+              value: '"c"',
+              type: 'string',
+            },
+            {
+              value: '"d"',
+              type: 'string',
+            },
+          ],
+        },
+        {
+          operator: 'isEqual',
+          values: [
+            {
+              value: '"e"',
+              type: 'string',
+            },
+            {
+              value: '"f"',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
-const c2 = [
-  {
-    logical: undefined,
-    operator: '!isEmpty',
-    values: [
-      { type: 'string', value: '"a"' },
-      { type: 'string', value: '"b"' },
-    ],
-  },
-  {
-    logical: '&&',
-    operator: 'isEqual',
-    values: [
-      { type: 'string', value: '"c"' },
-      { type: 'string', value: '"d"' },
-    ],
-  },
-];
+const c4 = {
+  or: [
+    {
+      operator: '!isEmpty',
+      values: [
+        {
+          value: '"a"',
+          type: 'string',
+        },
+        {
+          value: '"b"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: '"c"',
+          type: 'string',
+        },
+        {
+          value: '"d"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: '"e"',
+          type: 'string',
+        },
+        {
+          value: '"f"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: '"k"',
+          type: 'string',
+        },
+        {
+          value: '"z"',
+          type: 'string',
+        },
+      ],
+    },
+  ],
+};
 
-const c3 = [
-  {
-    logical: undefined,
-    operator: '!isEmpty',
-    values: [
-      { type: 'string', value: '"a"' },
-      { type: 'string', value: '"b"' },
-    ],
-  },
-  {
-    logical: '&&',
-    operator: 'isEqual',
-    values: [
-      { type: 'string', value: '"c"' },
-      { type: 'string', value: '"d"' },
-    ],
-  },
-  {
-    logical: '||',
-    operator: 'isEqual',
-    values: [
-      { type: 'string', value: '"e"' },
-      { type: 'string', value: '"f"' },
-    ],
-  },
-];
+const c5 = {
+  and: [
+    {
+      operator: '!isEmpty',
+      values: [
+        {
+          value: '"a"',
+          type: 'string',
+        },
+        {
+          value: '"b"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: '"c"',
+          type: 'string',
+        },
+        {
+          value: '"d"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: '"e"',
+          type: 'string',
+        },
+        {
+          value: '"f"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: '"k"',
+          type: 'string',
+        },
+        {
+          value: '"z"',
+          type: 'string',
+        },
+      ],
+    },
+  ],
+};
+
+const c0 = { and: [{ operator: '*', values: [] }] };
+
+const c1 = {
+  and: [
+    {
+      operator: '!isEmpty',
+      values: [
+        {
+          value: '"a"',
+          type: 'string',
+        },
+        {
+          value: '"b"',
+          type: 'string',
+        },
+      ],
+    },
+  ],
+};
+
+const c2 = {
+  and: [
+    {
+      operator: '!isEmpty',
+      values: [
+        {
+          value: '"a"',
+          type: 'string',
+        },
+        {
+          value: '"b"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: '"c"',
+          type: 'string',
+        },
+        {
+          value: '"d"',
+          type: 'string',
+        },
+      ],
+    },
+  ],
+};
+
+test('test and or condition', (t) => {
+  const result = basicToComplex(basic3);
+  t.deepEqual(result, c3);
+});
+
+test('test and or alternate condition', (t) => {
+  const result = basicToComplex(basic6);
+  t.deepEqual(result, c6);
+});
+
+test('test or condition', (t) => {
+  const result = basicToComplex(basic4);
+  t.deepEqual(result, c4);
+});
+
+test('test and condition', (t) => {
+  const result = basicToComplex(basic5);
+  t.deepEqual(result, c5);
+});
 
 test('test always condition', (t) => {
   const result = basicToComplex(basic0);
@@ -80,12 +326,7 @@ test('test basic condition', (t) => {
   t.deepEqual(result, c1);
 });
 
-test('test and condition', (t) => {
+test('test basic and condition', (t) => {
   const result = basicToComplex(basic2);
   t.deepEqual(result, c2);
-});
-
-test('test and or condition', (t) => {
-  const result = basicToComplex(basic3);
-  t.deepEqual(result, c3);
 });
