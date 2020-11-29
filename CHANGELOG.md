@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.3.0%0Dv1.3.1) (2020-11-29)
+
+
+### Docs
+
+* update docs badges ([625d0a6](https://github.com/ttessarolo/safe-evaluate-expression/commits/625d0a6f13639a041739627f0c14b189be3c94de))
+
 ## [1.3.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.2.0%0Dv1.3.0) (2020-11-29)
 
 
