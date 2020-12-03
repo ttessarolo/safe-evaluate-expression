@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.4.1%0Dv1.4.2) (2020-12-03)
+
+
+### Bug Fixes
+
+* basicToComplex and or computation fix ([2658ccb](https://github.com/ttessarolo/safe-evaluate-expression/commits/2658ccb33c636b65bff1143ab028624f2070a727))
+
 ### [1.4.1](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.4.0%0Dv1.4.1) (2020-12-03)
 
 
