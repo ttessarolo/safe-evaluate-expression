@@ -27,7 +27,6 @@ function compose(rule) {
 function extract(rule) {
   rule = rule.replace(/not /g, '!').trim();
   const ors = new Set();
-  const ands = new Set();
   const newRule = rule.replace(/ OR /g, 'OR');
   const orRule = newRule.replace(/\s/g, '').replace(/AND/g, ' ');
   const matched = orRule.match(matchOR);
@@ -37,12 +36,13 @@ function extract(rule) {
     });
   }
 
-  newRule
+  const ands = orRule
     .replace(matchOR, '')
-    .split(' AND ')
-    .forEach((and) => and && ands.add(and));
+    .trim()
+    .split(' ')
+    .filter((a) => a);
 
-  return [[...ors].map((or) => compose(or)), [...ands].map((and) => compose(and))];
+  return [[...ors].map((or) => compose(or)), ands.map((and) => compose(and))];
 }
 
 function basicToComplex(rule) {

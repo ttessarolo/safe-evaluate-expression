@@ -303,19 +303,6 @@ const c7 = {
       operator: 'equals',
       values: [
         {
-          value: 'context_device',
-          type: 'metadata',
-        },
-        {
-          value: 'tablet',
-          type: 'string',
-        },
-      ],
-    },
-    {
-      operator: 'equals',
-      values: [
-        {
           value: 'when_day_of_the_week',
           type: 'metadata',
         },
