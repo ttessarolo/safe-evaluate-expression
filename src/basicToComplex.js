@@ -1,5 +1,5 @@
 const { FUNC_PARAMS } = require('./factory');
-
+const shortid = require('shortid');
 const matchOR = /([^\s]+)OR([^\s]+)/g;
 
 function getType(value) {
@@ -27,7 +27,7 @@ function compose(rule) {
     ? params.map((value) => ({ value: getValue(value), type: getType(value) }))
     : emptyValues;
 
-  return { operator, values };
+  return { id: shortid.generate(), operator, values };
 }
 
 function extract(rule) {

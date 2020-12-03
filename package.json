@@ -34,12 +34,15 @@
     "url": "https://github.com/ttessarolo/safe-evaluate-expression/issues"
   },
   "homepage": "https://github.com/ttessarolo/safe-evaluate-expression#readme",
-  "dependencies": {},
+  "dependencies": {
+    "shortid": "^2.2.16"
+  },
   "devDependencies": {
     "ava": "^3.13.0",
     "codecov": "^3.8.1",
     "commitizen": "^4.2.2",
     "cz-conventional-changelog": "^3.3.0",
+    "deep-cleaner": "^1.2.1",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",

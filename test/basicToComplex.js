@@ -1,4 +1,5 @@
 const test = require('ava');
+const cleaner = require('deep-cleaner');
 const { basicToComplex } = require('../');
 
 const basic0 = `*`;
@@ -384,46 +385,46 @@ const c8 = {
 };
 
 test('test and or condition', (t) => {
-  const result = basicToComplex(basic3);
+  const result = cleaner(basicToComplex(basic3), ['id']);
   t.deepEqual(result, c3);
 });
 
 test('test and or alternate condition', (t) => {
-  const result = basicToComplex(basic6);
+  const result = cleaner(basicToComplex(basic6), ['id']);
   t.deepEqual(result, c6);
 });
 
 test('test or condition', (t) => {
-  const result = basicToComplex(basic4);
+  const result = cleaner(basicToComplex(basic4), ['id']);
   t.deepEqual(result, c4);
 });
 
 test('test and condition', (t) => {
-  const result = basicToComplex(basic5);
+  const result = cleaner(basicToComplex(basic5), ['id']);
   t.deepEqual(result, c5);
 });
 
 test('test always condition', (t) => {
-  const result = basicToComplex(basic0);
+  const result = cleaner(basicToComplex(basic0), ['id']);
   t.deepEqual(result, c0);
 });
 
 test('test basic condition', (t) => {
-  const result = basicToComplex(basic1);
+  const result = cleaner(basicToComplex(basic1), ['id']);
   t.deepEqual(result, c1);
 });
 
 test('test basic and condition', (t) => {
-  const result = basicToComplex(basic2);
+  const result = cleaner(basicToComplex(basic2), ['id']);
   t.deepEqual(result, c2);
 });
 
 test('test basic7', (t) => {
-  const result = basicToComplex(basic7);
+  const result = cleaner(basicToComplex(basic7), ['id']);
   t.deepEqual(result, c7);
 });
 
 test('test basic8', (t) => {
-  const result = basicToComplex(basic8);
+  const result = cleaner(basicToComplex(basic8), ['id']);
   t.deepEqual(result, c8);
 });
