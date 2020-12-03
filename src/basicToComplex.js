@@ -23,7 +23,8 @@ function extract(rule) {
   const ors = new Set();
   const ands = new Set();
   const newRule = rule.replace(/ OR /g, 'OR');
-  const matched = newRule.match(matchOR);
+  const orRule = newRule.replace(/\s/g, '').replace(/AND/g, ' ');
+  const matched = orRule.match(matchOR);
   if (matched) {
     matched.forEach((m) => {
       m.split('OR').forEach((or) => ors.add(or));

@@ -8,6 +8,8 @@ const basic3 = `not isEmpty("a","b") OR isEqual("c","d") OR isEqual("e","f") AND
 const basic4 = `not isEmpty("a","b") OR isEqual("c","d") OR isEqual("e","f") OR isEqual("k","z")`;
 const basic5 = `not isEmpty("a","b") AND isEqual("c","d") AND isEqual("e","f") AND isEqual("k","z")`;
 const basic6 = `not isEmpty("a","b") AND isEqual("c","d") OR isEqual("e","f") AND isEqual("k","z")`;
+const basic7 =
+  'equals(context_device, "desktop") OR equals(context_device, "tablet") AND equals(when_day_of_the_week, "Tuesday") AND greaterThan(now, "21") AND lessThan(now, "23")';
 
 const c3 = {
   and: [
@@ -296,6 +298,93 @@ const c2 = {
   ],
 };
 
+const c7 = {
+  and: [
+    {
+      operator: 'equals',
+      values: [
+        {
+          value: 'context_device',
+          type: 'metadata',
+        },
+        {
+          value: '"tablet"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'equals',
+      values: [
+        {
+          value: 'when_day_of_the_week',
+          type: 'metadata',
+        },
+        {
+          value: '"Tuesday"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'greaterThan',
+      values: [
+        {
+          value: 'now',
+          type: 'metadata',
+        },
+        {
+          value: '"21"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'lessThan',
+      values: [
+        {
+          value: 'now',
+          type: 'metadata',
+        },
+        {
+          value: '"23"',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      or: [
+        {
+          operator: 'equals',
+          values: [
+            {
+              value: 'context_device',
+              type: 'metadata',
+            },
+            {
+              value: '"desktop"',
+              type: 'string',
+            },
+          ],
+        },
+        {
+          operator: 'equals',
+          values: [
+            {
+              value: 'context_device',
+              type: 'metadata',
+            },
+            {
+              value: '"tablet"',
+              type: 'string',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 test('test and or condition', (t) => {
   const result = basicToComplex(basic3);
   t.deepEqual(result, c3);
@@ -329,4 +418,9 @@ test('test basic condition', (t) => {
 test('test basic and condition', (t) => {
   const result = basicToComplex(basic2);
   t.deepEqual(result, c2);
+});
+
+test('test basic7', (t) => {
+  const result = basicToComplex(basic7);
+  t.deepEqual(result, c7);
 });
