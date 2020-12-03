@@ -10,7 +10,7 @@ const basic5 = `not isEmpty("a","b") AND isEqual("c","d") AND isEqual("e","f") A
 const basic6 = `not isEmpty("a","b") AND isEqual("c","d") OR isEqual("e","f") AND isEqual("k","z")`;
 const basic7 =
   'equals(context_device, "desktop") OR equals(context_device, "tablet") AND equals(when_day_of_the_week, "Tuesday") AND greaterThan(now, "21") AND lessThan(now, "23")';
-
+const basic8 = 'condition (equals(, ))';
 const c3 = {
   and: [
     {
@@ -371,6 +371,18 @@ const c7 = {
   ],
 };
 
+const c8 = {
+  and: [
+    {
+      operator: 'condition',
+      values: [
+        { value: '', type: 'string' },
+        { value: '', type: 'string' },
+      ],
+    },
+  ],
+};
+
 test('test and or condition', (t) => {
   const result = basicToComplex(basic3);
   t.deepEqual(result, c3);
@@ -409,4 +421,9 @@ test('test basic and condition', (t) => {
 test('test basic7', (t) => {
   const result = basicToComplex(basic7);
   t.deepEqual(result, c7);
+});
+
+test('test basic8', (t) => {
+  const result = basicToComplex(basic8);
+  t.deepEqual(result, c8);
 });

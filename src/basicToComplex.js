@@ -14,12 +14,18 @@ function getValue(value) {
   return value.replace(/"/g, '').replace(/'/g, '');
 }
 
+const emptyValues = [
+  { value: '', type: 'string' },
+  { value: '', type: 'string' },
+];
+
 function compose(rule) {
   rule = rule.replace(/not /g, '!').trim();
   const operator = rule.substring(0, rule.indexOf('('));
-  const values = rule
-    .match(FUNC_PARAMS)
-    .map((value) => ({ value: getValue(value), type: getType(value) }));
+  const params = rule.match(FUNC_PARAMS);
+  const values = params
+    ? params.map((value) => ({ value: getValue(value), type: getType(value) }))
+    : emptyValues;
 
   return { operator, values };
 }
