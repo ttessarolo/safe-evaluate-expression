@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.4.3%0Dv1.5.0) (2020-12-03)
+
+
+### Features
+
+* added id to SimpleToComplex rule generator ([b6d537d](https://github.com/ttessarolo/safe-evaluate-expression/commits/b6d537d340e089d027482e9850b3cbe91246c706))
+
 ### [1.4.3](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.4.2%0Dv1.4.3) (2020-12-03)
 
 
