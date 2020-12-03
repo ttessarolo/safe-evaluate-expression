@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.3.2%0Dv1.4.0) (2020-12-03)
+
+
+### Features
+
+* dont double-quote when BasicToComples + updated tests ([0301c3a](https://github.com/ttessarolo/safe-evaluate-expression/commits/0301c3abee83a8e54da82a25f47b0065fa6a5519))
+
 ### [1.3.2](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.3.1%0Dv1.3.2) (2020-12-03)
 
 
