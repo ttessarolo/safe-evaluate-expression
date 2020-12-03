@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.3](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.4.2%0Dv1.4.3) (2020-12-03)
+
+
+### Tests
+
+* add Test case for empty basic rules ([f766774](https://github.com/ttessarolo/safe-evaluate-expression/commits/f7667747967a3124eea8443a663c56d6481904b8))
+
 ### [1.4.2](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.4.1%0Dv1.4.2) (2020-12-03)
 
 
