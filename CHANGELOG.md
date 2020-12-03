@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.4.0%0Dv1.4.1) (2020-12-03)
+
+
+### Tests
+
+* get Rid of console.log in test ([a00ccd0](https://github.com/ttessarolo/safe-evaluate-expression/commits/a00ccd0fafd63a6e1efb81c6cdb006ff124dcc52))
+
 ## [1.4.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.3.2%0Dv1.4.0) (2020-12-03)
 
 
