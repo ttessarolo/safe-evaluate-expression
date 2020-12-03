@@ -17,11 +17,11 @@ const c3 = {
       operator: 'isEqual',
       values: [
         {
-          value: '"k"',
+          value: 'k',
           type: 'string',
         },
         {
-          value: '"z"',
+          value: 'z',
           type: 'string',
         },
       ],
@@ -32,24 +32,11 @@ const c3 = {
           operator: '!isEmpty',
           values: [
             {
-              value: '"a"',
+              value: 'a',
               type: 'string',
             },
             {
-              value: '"b"',
-              type: 'string',
-            },
-          ],
-        },
-        {
-          operator: 'isEqual',
-          values: [
-            {
-              value: '"c"',
-              type: 'string',
-            },
-            {
-              value: '"d"',
+              value: 'b',
               type: 'string',
             },
           ],
@@ -58,11 +45,24 @@ const c3 = {
           operator: 'isEqual',
           values: [
             {
-              value: '"e"',
+              value: 'c',
               type: 'string',
             },
             {
-              value: '"f"',
+              value: 'd',
+              type: 'string',
+            },
+          ],
+        },
+        {
+          operator: 'isEqual',
+          values: [
+            {
+              value: 'e',
+              type: 'string',
+            },
+            {
+              value: 'f',
               type: 'string',
             },
           ],
@@ -78,11 +78,11 @@ const c6 = {
       operator: '!isEmpty',
       values: [
         {
-          value: '"a"',
+          value: 'a',
           type: 'string',
         },
         {
-          value: '"b"',
+          value: 'b',
           type: 'string',
         },
       ],
@@ -91,11 +91,11 @@ const c6 = {
       operator: 'isEqual',
       values: [
         {
-          value: '"k"',
+          value: 'k',
           type: 'string',
         },
         {
-          value: '"z"',
+          value: 'z',
           type: 'string',
         },
       ],
@@ -106,11 +106,11 @@ const c6 = {
           operator: 'isEqual',
           values: [
             {
-              value: '"c"',
+              value: 'c',
               type: 'string',
             },
             {
-              value: '"d"',
+              value: 'd',
               type: 'string',
             },
           ],
@@ -119,11 +119,11 @@ const c6 = {
           operator: 'isEqual',
           values: [
             {
-              value: '"e"',
+              value: 'e',
               type: 'string',
             },
             {
-              value: '"f"',
+              value: 'f',
               type: 'string',
             },
           ],
@@ -139,24 +139,11 @@ const c4 = {
       operator: '!isEmpty',
       values: [
         {
-          value: '"a"',
+          value: 'a',
           type: 'string',
         },
         {
-          value: '"b"',
-          type: 'string',
-        },
-      ],
-    },
-    {
-      operator: 'isEqual',
-      values: [
-        {
-          value: '"c"',
-          type: 'string',
-        },
-        {
-          value: '"d"',
+          value: 'b',
           type: 'string',
         },
       ],
@@ -165,11 +152,11 @@ const c4 = {
       operator: 'isEqual',
       values: [
         {
-          value: '"e"',
+          value: 'c',
           type: 'string',
         },
         {
-          value: '"f"',
+          value: 'd',
           type: 'string',
         },
       ],
@@ -178,11 +165,24 @@ const c4 = {
       operator: 'isEqual',
       values: [
         {
-          value: '"k"',
+          value: 'e',
           type: 'string',
         },
         {
-          value: '"z"',
+          value: 'f',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: 'k',
+          type: 'string',
+        },
+        {
+          value: 'z',
           type: 'string',
         },
       ],
@@ -196,24 +196,11 @@ const c5 = {
       operator: '!isEmpty',
       values: [
         {
-          value: '"a"',
+          value: 'a',
           type: 'string',
         },
         {
-          value: '"b"',
-          type: 'string',
-        },
-      ],
-    },
-    {
-      operator: 'isEqual',
-      values: [
-        {
-          value: '"c"',
-          type: 'string',
-        },
-        {
-          value: '"d"',
+          value: 'b',
           type: 'string',
         },
       ],
@@ -222,11 +209,11 @@ const c5 = {
       operator: 'isEqual',
       values: [
         {
-          value: '"e"',
+          value: 'c',
           type: 'string',
         },
         {
-          value: '"f"',
+          value: 'd',
           type: 'string',
         },
       ],
@@ -235,18 +222,30 @@ const c5 = {
       operator: 'isEqual',
       values: [
         {
-          value: '"k"',
+          value: 'e',
           type: 'string',
         },
         {
-          value: '"z"',
+          value: 'f',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      operator: 'isEqual',
+      values: [
+        {
+          value: 'k',
+          type: 'string',
+        },
+        {
+          value: 'z',
           type: 'string',
         },
       ],
     },
   ],
 };
-
 const c0 = { and: [{ operator: '*', values: [] }] };
 
 const c1 = {
@@ -255,11 +254,11 @@ const c1 = {
       operator: '!isEmpty',
       values: [
         {
-          value: '"a"',
+          value: 'a',
           type: 'string',
         },
         {
-          value: '"b"',
+          value: 'b',
           type: 'string',
         },
       ],
@@ -273,11 +272,11 @@ const c2 = {
       operator: '!isEmpty',
       values: [
         {
-          value: '"a"',
+          value: 'a',
           type: 'string',
         },
         {
-          value: '"b"',
+          value: 'b',
           type: 'string',
         },
       ],
@@ -286,11 +285,11 @@ const c2 = {
       operator: 'isEqual',
       values: [
         {
-          value: '"c"',
+          value: 'c',
           type: 'string',
         },
         {
-          value: '"d"',
+          value: 'd',
           type: 'string',
         },
       ],
@@ -308,7 +307,7 @@ const c7 = {
           type: 'metadata',
         },
         {
-          value: '"tablet"',
+          value: 'tablet',
           type: 'string',
         },
       ],
@@ -321,7 +320,7 @@ const c7 = {
           type: 'metadata',
         },
         {
-          value: '"Tuesday"',
+          value: 'Tuesday',
           type: 'string',
         },
       ],
@@ -334,7 +333,7 @@ const c7 = {
           type: 'metadata',
         },
         {
-          value: '"21"',
+          value: '21',
           type: 'string',
         },
       ],
@@ -347,7 +346,7 @@ const c7 = {
           type: 'metadata',
         },
         {
-          value: '"23"',
+          value: '23',
           type: 'string',
         },
       ],
@@ -362,7 +361,7 @@ const c7 = {
               type: 'metadata',
             },
             {
-              value: '"desktop"',
+              value: 'desktop',
               type: 'string',
             },
           ],
@@ -375,7 +374,7 @@ const c7 = {
               type: 'metadata',
             },
             {
-              value: '"tablet"',
+              value: 'tablet',
               type: 'string',
             },
           ],

@@ -10,10 +10,16 @@ function getType(value) {
   return 'metadata';
 }
 
+function getValue(value) {
+  return value.replace(/"/g, '').replace(/'/g, '');
+}
+
 function compose(rule) {
   rule = rule.replace(/not /g, '!').trim();
   const operator = rule.substring(0, rule.indexOf('('));
-  const values = rule.match(FUNC_PARAMS).map((value) => ({ value, type: getType(value) }));
+  const values = rule
+    .match(FUNC_PARAMS)
+    .map((value) => ({ value: getValue(value), type: getType(value) }));
 
   return { operator, values };
 }

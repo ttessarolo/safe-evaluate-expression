@@ -143,6 +143,7 @@ const b12 = `(isEqual("k", "z") && (!isEmpty("a", "b") || isEqual("c", "d") || i
 
 test('test deep nested condition', (t) => {
   const result = complexToBasic(c10);
+  console.log(JSON.stringify(result, null, 1));
   t.deepEqual(result, b10);
 });
 
@@ -153,5 +154,5 @@ test('test always condition', (t) => {
 
 test('test and or condition', (t) => {
   const result = complexToBasic(c12);
-  t.deepEqual([], []);
+  t.deepEqual(result, b12);
 });
