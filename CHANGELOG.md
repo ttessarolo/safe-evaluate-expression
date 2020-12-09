@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.5.0%0Dv1.6.0) (2020-12-09)
+
+
+### Features
+
+* **factory.js:** handle params and args with multiple trail in key ([6750c60](https://github.com/ttessarolo/safe-evaluate-expression/commits/6750c609f86083d9be29e1cf9c2d4649b638dec3))
+
 ## [1.5.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.4.3%0Dv1.5.0) (2020-12-03)
 
 
