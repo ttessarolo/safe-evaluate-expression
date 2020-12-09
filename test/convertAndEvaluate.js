@@ -66,5 +66,6 @@ test('test falsy condition', (t) => {
 test('test falsy basic to complex condition', (t) => {
   const complex = basicToComplex(basic);
   const condition = complexToBasic(complex);
+
   t.true(evaluate(condition, metadata));
 });

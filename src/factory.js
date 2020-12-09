@@ -5,7 +5,9 @@ const complexToBasic = require('./complexToBasic');
 
 // const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\())\b[\"|\']?/g;
 // const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\(|\.))\b[\"|\']?/g;
-const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)\w+\b)/g;
+// const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)\w+\b)/g;
+
+const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)(\w|-)+\b)/g;
 const OPERA_EXT = /\b\w+(\w(\())/g;
 const prefixOperators = (str) => str.replace(OPERA_EXT, (o) => `_.${o}`);
 const strip = (p) => p.replace(/"/g, '');
@@ -14,6 +16,10 @@ const strip = (p) => p.replace(/"/g, '');
 // Wrap a param in a try-catch to handle undefined params
 //**************************************************************
 const makeSafeParam = (param, undef) => {
+  if (!param.includes('"') && param.includes('-')) {
+    param = param.replace(/-/g, '_');
+  }
+
   const wrap = `(() => {
       try {
         return ${param} !== undefined ? ${param} : ${undef};
@@ -39,7 +45,18 @@ const makeSafeParam = (param, undef) => {
 // try-catch to handle undefined
 //**************************************************************
 const makeSafe = (str, undef) => str.replace(FUNC_PARAMS, (p) => makeSafeParam(p, undef));
+const makeSafeArgs = (args) => {
+  args.forEach((argomento) => {
+    Object.entries(argomento).forEach(([key, value]) => {
+      if (key.includes('-')) {
+        argomento[key.replace(/-/g, '_')] = value;
+        delete argomento[key];
+      }
+    });
+  });
 
+  return args;
+};
 function evaluateFactory({
   multipleParams = false,
   operatorsInScope = false,
@@ -65,6 +82,7 @@ function evaluateFactory({
       undef
     );
 
+    args = makeSafeArgs(args);
     const argomenti = multipleParams ? args : args[0] || {};
     const input = multipleParams
       ? 'args, _'

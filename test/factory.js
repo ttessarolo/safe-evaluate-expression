@@ -57,3 +57,35 @@ test(`complex string`, (t) =>
   t.true(evaluate(`isEqual(now, "2020-11-07T23:00:00.000Zรท2020-11-14T22:59:59.000Z")`, metadata)));
 
 test('expression complex', (t) => t.true(evaluate(expression4, metadata, list)));
+
+test('includes with trail', (t) => {
+  const condition = {
+    and: [
+      {
+        operator: 'includes',
+        values: [
+          { type: 'string', value: 'social-all' },
+          { type: 'string', value: '"a"' },
+        ],
+      },
+    ],
+  };
+
+  t.true(evaluate(condition, { 'social-all': '["a"]' }, { ciao: 'mamma' }));
+});
+
+test('includes with mulit-trail', (t) => {
+  const condition = {
+    and: [
+      {
+        operator: 'includes',
+        values: [
+          { type: 'string', value: 'social-news-all' },
+          { type: 'string', value: '"a"' },
+        ],
+      },
+    ],
+  };
+
+  t.true(evaluate(condition, { 'social-news-all': '["a"]' }, { ciao: 'mamma' }));
+});
