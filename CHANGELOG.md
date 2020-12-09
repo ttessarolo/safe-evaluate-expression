@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.6.0%0Dv1.6.1) (2020-12-09)
+
+
+### Bug Fixes
+
+* fixArgs now check if args is valid, and if every arg is valid ([8ca5a36](https://github.com/ttessarolo/safe-evaluate-expression/commits/8ca5a362b290366b4434496381d1262b087863e5))
+
 ## [1.6.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.5.0%0Dv1.6.0) (2020-12-09)
 
 
