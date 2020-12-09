@@ -46,13 +46,16 @@ const makeSafeParam = (param, undef) => {
 //**************************************************************
 const makeSafe = (str, undef) => str.replace(FUNC_PARAMS, (p) => makeSafeParam(p, undef));
 const makeSafeArgs = (args) => {
+  if (!args) return;
   args.forEach((argomento) => {
-    Object.entries(argomento).forEach(([key, value]) => {
-      if (key.includes('-')) {
-        argomento[key.replace(/-/g, '_')] = value;
-        delete argomento[key];
-      }
-    });
+    if (argomento) {
+      Object.entries(argomento).forEach(([key, value]) => {
+        if (key.includes('-')) {
+          argomento[key.replace(/-/g, '_')] = value;
+          delete argomento[key];
+        }
+      });
+    }
   });
 
   return args;
