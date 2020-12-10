@@ -45,8 +45,6 @@ evaluate(
 ); // --> true
 ```
 
-_NB. As constant params in expression you can use only string and integers (eg. 1, "a") no floating numbers!_
-
 ## Advanced Example
 
 ```javascript

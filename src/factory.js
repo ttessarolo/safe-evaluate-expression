@@ -6,8 +6,9 @@ const complexToBasic = require('./complexToBasic');
 // const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\())\b[\"|\']?/g;
 // const FUNC_PARAMS = /[\"|\']?\w+(\b(?!\(|\.))\b[\"|\']?/g;
 // const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)\w+\b)/g;
+//const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)(\w|-)+\b)/g;
 
-const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)(\w|-)+\b)/g;
+const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)((\w|-)|([+-]?([0-9]*[.])?[0-9]+))+\b)/g;
 const OPERA_EXT = /\b\w+(\w(\())/g;
 const prefixOperators = (str) => str.replace(OPERA_EXT, (o) => `_.${o}`);
 const strip = (p) => p.replace(/"/g, '');
