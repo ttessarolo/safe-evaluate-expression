@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.6.1%0Dv1.7.0) (2020-12-10)
+
+
+### Features
+
+* now supports floating numbers ([35bd489](https://github.com/ttessarolo/safe-evaluate-expression/commits/35bd489cb3a804f479953319c19226f05184baa4))
+
 ### [1.6.1](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.6.0%0Dv1.6.1) (2020-12-09)
 
 
