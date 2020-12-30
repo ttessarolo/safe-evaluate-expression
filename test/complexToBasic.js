@@ -136,10 +136,21 @@ const c12 = {
   ],
 };
 
+c13 = {
+  and: [
+    {
+      operator: 'isEmpty',
+      values: [{ type: 'metadata', value: 'query_title' }, { value: '' }],
+      id: 'EybWr2jujI',
+    },
+  ],
+};
+
 const b10 = `(((isEqual(dayOfTheWeek, "Lun") && (isGreater(hourOfDay, 10) && isLess(hourOfDay, 12))) || (isEqual(dayOfTheWeek, "Ven") && (isGreater(hourOfDay, 20) && isLess(hourOfDay, 23)))) && isEqual(recommendable, true))`;
 const c11 = { and: [{ operator: '*' }] };
 const b11 = `*`;
 const b12 = `(isEqual("k", "z") && (!isEmpty("a", "b") || isEqual("c", "d") || isEqual("e", "f")))`;
+const b13 = `(isEmpty(query_title))`;
 
 test('test deep nested condition', (t) => {
   const result = complexToBasic(c10);
@@ -154,4 +165,9 @@ test('test always condition', (t) => {
 test('test and or condition', (t) => {
   const result = complexToBasic(c12);
   t.deepEqual(result, b12);
+});
+
+test('test one value condition', (t) => {
+  const result = complexToBasic(c13);
+  t.deepEqual(result, b13);
 });
