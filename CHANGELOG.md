@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.1](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.7.0%0Dv1.7.1) (2020-12-30)
+
+
+### Bug Fixes
+
+* complex2Basic now correctly handle one value expression ([f304643](https://github.com/ttessarolo/safe-evaluate-expression/commits/f30464307766842e65b9e85c760be6a04e99e0f7))
+
 ## [1.7.0](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.6.1%0Dv1.7.0) (2020-12-10)
 
 
