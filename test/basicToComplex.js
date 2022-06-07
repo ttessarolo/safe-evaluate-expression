@@ -12,6 +12,9 @@ const basic6 = `not isEmpty("a","b") AND isEqual("c","d") OR isEqual("e","f") AN
 const basic7 =
   'equals(context_device, "desktop") OR equals(context_device, "tablet") AND equals(when_day_of_the_week, "Tuesday") AND greaterThan(now, "21") AND lessThan(now, "23")';
 const basic8 = 'condition (equals(, ))';
+const basic9 =
+  'dateRange(when_now, "2021-01-31T23:00:00.000Z÷2021-02-02T22:59:59.000Z") AND not equals(id_series_se, "SE000000000025") AND not equals(id_series_se, "SE000000000926") AND greaterEqualThan(when_current_hour, "9") AND lessEqualThan(when_current_hour, "11") OR dateRange(when_now, "2021-01-31T23:00:00.000Z÷2021-02-03T22:59:59.000Z") AND not equals(id_series_se, "SE000000000025") AND not equals(id_series_se, "SE000000000926") AND greaterEqualThan(when_current_hour, "20") AND lessEqualThan(when_current_hour, "21")';
+
 const c3 = {
   and: [
     {
@@ -384,6 +387,85 @@ const c8 = {
   ],
 };
 
+const c9 = {
+  and: [
+    {
+      operator: 'dateRange',
+      values: [
+        { value: 'when_now', type: 'metadata' },
+        { value: '2021-01-31T23:00:00.000Z÷2021-02-02T22:59:59.000Z', type: 'string' },
+      ],
+    },
+    {
+      operator: '!equals',
+      values: [
+        { value: 'id_series_se', type: 'metadata' },
+        { value: 'SE000000000025', type: 'string' },
+      ],
+    },
+    {
+      operator: '!equals',
+      values: [
+        { value: 'id_series_se', type: 'metadata' },
+        { value: 'SE000000000926', type: 'string' },
+      ],
+    },
+    {
+      operator: 'greaterEqualThan',
+      values: [
+        { value: 'when_current_hour', type: 'metadata' },
+        { value: '9', type: 'date' },
+      ],
+    },
+    {
+      operator: '!equals',
+      values: [
+        { value: 'id_series_se', type: 'metadata' },
+        { value: 'SE000000000025', type: 'string' },
+      ],
+    },
+    {
+      operator: '!equals',
+      values: [
+        { value: 'id_series_se', type: 'metadata' },
+        { value: 'SE000000000926', type: 'string' },
+      ],
+    },
+    {
+      operator: 'greaterEqualThan',
+      values: [
+        { value: 'when_current_hour', type: 'metadata' },
+        { value: '20', type: 'string' },
+      ],
+    },
+    {
+      operator: 'lessEqualThan',
+      values: [
+        { value: 'when_current_hour', type: 'metadata' },
+        { value: '21', type: 'string' },
+      ],
+    },
+    {
+      or: [
+        {
+          operator: 'lessEqualThan',
+          values: [
+            { value: 'when_current_hour', type: 'metadata' },
+            { value: '11', type: 'date' },
+          ],
+        },
+        {
+          operator: 'dateRange',
+          values: [
+            { value: 'when_now', type: 'metadata' },
+            { value: '2021-01-31T23:00:00.000Z÷2021-02-03T22:59:59.000Z', type: 'string' },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 test('test and or condition', (t) => {
   const result = cleaner(basicToComplex(basic3), ['id']);
   t.deepEqual(result, c3);
@@ -427,4 +509,9 @@ test('test basic7', (t) => {
 test('test basic8', (t) => {
   const result = cleaner(basicToComplex(basic8), ['id']);
   t.deepEqual(result, c8);
+});
+
+test('test basic9', (t) => {
+  const result = cleaner(basicToComplex(basic9), ['id']);
+  t.deepEqual(result, c9);
 });

@@ -8,7 +8,8 @@ const complexToBasic = require('./complexToBasic');
 // const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)\w+\b)/g;
 //const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)(\w|-)+\b)/g;
 
-const FUNC_PARAMS = /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)((\w|-)|([+-]?([0-9]*[.])?[0-9]+))+\b)/g;
+const FUNC_PARAMS =
+  /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)((\w|-)|([+-]?([0-9]*[.])?[0-9]+))+\b)/g;
 const OPERA_EXT = /\b\w+(\w(\())/g;
 const prefixOperators = (str) => str.replace(OPERA_EXT, (o) => `_.${o}`);
 const strip = (p) => p.replace(/"/g, '');
@@ -28,7 +29,9 @@ const makeSafeParam = (param, undef) => {
         try {
           for(const arg of args){
             if(arg.get) return arg.get("${strip(param)}")
-            if(typeof arg === "object" && arg["${strip(param)}"]) return arg["${strip(param)}"];
+            if(typeof arg === "object" && arg["${strip(param)}"] !== undefined) return arg["${strip(
+    param
+  )}"];
           }
         } catch(e){
           return ${undef};
