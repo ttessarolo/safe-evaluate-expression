@@ -33,6 +33,26 @@ const expression4 = {
   ],
 };
 
+const expression5 = {
+  and: [
+    {
+      operator: '*',
+      values: [
+        {
+          type: 'metadata',
+          value: '',
+        },
+        {
+          type: '',
+          value: '',
+        },
+      ],
+      id: 'Bg8NiI52KJ',
+    },
+  ],
+};
+
+test('expression *', (t) => t.true(evaluate(expression5, metadata, list)));
 test('expression1', (t) => t.true(evaluate(expression1, metadata, list)));
 test('expression1 OR expression2', (t) =>
   t.true(evaluate(`${expression1} OR ${expression2}`, metadata, list)));

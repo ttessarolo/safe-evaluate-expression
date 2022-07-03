@@ -95,6 +95,7 @@ function evaluateFactory({
       ? 'args, _'
       : `{${(argomenti.keys ? argomenti.keys() : Object.keys(argomenti)).map((k) => k).join(',')}}`;
 
+    if (condition === '*') condition = 'true';
     const func = new Function(input, `${operatorsScoped} \n\n return ${condition}`);
     return func(argomenti, operators);
   };
