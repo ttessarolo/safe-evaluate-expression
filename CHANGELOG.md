@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.3](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.7.2%0Dv1.7.3) (2022-07-03)
+
+
+### Bug Fixes
+
+* complex Expression With only * ([89a06dc](https://github.com/ttessarolo/safe-evaluate-expression/commits/89a06dc3dc8cb595e2219f21cdbd5fbc4f9b04b0))
+
 ### [1.7.2](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.7.1%0Dv1.7.2) (2022-06-07)
 
 
