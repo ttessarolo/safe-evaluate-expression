@@ -5,14 +5,17 @@ const os = require('os')
 const proxyquire = require('proxyquire')
 
 const platforms = [
+  ['aix', `${os.homedir()}/.cache/linusu`],
   ['darwin', `${os.homedir()}/Library/Caches/linusu`],
   ['freebsd', `${os.homedir()}/.cache/linusu`],
   ['linux', `${os.homedir()}/.cache/linusu`],
+  ['netbsd', `${os.homedir()}/.cache/linusu`],
   ['openbsd', `${os.homedir()}/.cache/linusu`],
+  ['sunos', `${os.homedir()}/.cache/linusu`],
   ['win32', `${os.homedir()}/AppData/Local/linusu/Cache`]
 ]
 
-platforms.forEach(function (platform) {
+platforms.forEach((platform) => {
   describe(platform[0], () => {
     let cachedir
 
@@ -28,7 +31,7 @@ platforms.forEach(function (platform) {
       const actual = cachedir('linusu')
       const expected = platform[1]
 
-      assert.equal(actual, expected)
+      assert.strictEqual(actual, expected)
     })
 
     if (platform[0] === 'win32') {
@@ -40,7 +43,7 @@ platforms.forEach(function (platform) {
           process.env.LOCALAPPDATA = oldLocalAppData
           const expected = 'X:/LocalAppData/linusu/Cache'
 
-          assert.equal(actual, expected)
+          assert.strictEqual(actual, expected)
         })
       })
     }
@@ -55,5 +58,29 @@ platforms.forEach(function (platform) {
       assert.throws(() => cachedir('test!!'))
       assert.throws(() => cachedir(undefined))
     })
+  })
+})
+
+describe('fallback', () => {
+  it('should fallback to posix with warning', () => {
+    const originalError = console.error
+
+    try {
+      const logs = []
+      console.error = (msg) => logs.push(msg)
+
+      const os = { platform: () => 'test' }
+      const cachedir = proxyquire('./', { os })
+
+      const actual = cachedir('linusu')
+      const expected = `${os.homedir()}/.cache/linusu`
+      assert.strictEqual(actual, expected)
+
+      assert.deepStrictEqual(logs, [
+        `(node:${process.pid}) [cachedir] Warning: the platform "test" is not currently supported by node-cachedir, falling back to "posix". Please file an issue with your platform here: https://github.com/LinusU/node-cachedir/issues/new`
+      ])
+    } finally {
+      console.error = originalError
+    }
   })
 })

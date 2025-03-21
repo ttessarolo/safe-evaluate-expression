@@ -17,6 +17,7 @@ const isGreater = (a, b) => a > b;
 const isLower = (a, b) => a < b;
 const isGreaterEqualThan = (a, b) => Number(a) >= Number(b);
 const isLessEqualThan = (a, b) => Number(a) <= Number(b);
-const includes = (a, b) => (a ? a.includes(b) : false);`;
+const includes = (a, b) => (a ? a.includes(b) : false);
+const sizeGreater = (a, b) => a.length > b;`;
 
 test('operators are in scope', (t) => t.is(putInScope(operators), expected));

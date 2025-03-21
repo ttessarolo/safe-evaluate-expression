@@ -6,9 +6,10 @@
 'use strict';
 
 const makeNoMethodSetStateRule = require('../util/makeNoMethodSetStateRule');
-const versionUtil = require('../util/version');
+const testReactVersion = require('../util/version').testReactVersion;
 
+/** @type {import('eslint').Rule.RuleModule} */
 module.exports = makeNoMethodSetStateRule(
   'componentWillUpdate',
-  (context) => versionUtil.testReactVersion(context, '16.3.0')
+  (context) => testReactVersion(context, '>= 16.3.0')
 );

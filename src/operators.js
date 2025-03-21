@@ -16,4 +16,5 @@ module.exports = {
   isGreaterEqualThan: (a, b) => Number(a) >= Number(b),
   isLessEqualThan: (a, b) => Number(a) <= Number(b),
   includes: (a, b) => (a ? a.includes(b) : false),
+  sizeGreater: (a, b) => a.length > b,
 };

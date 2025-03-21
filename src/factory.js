@@ -12,7 +12,8 @@ const FUNC_PARAMS =
   /(["'])(?:(?=(\\?))\2.)*?\1|\b(\b(?!\w*\(|_\b)((\w|-)|([+-]?([0-9]*[.])?[0-9]+))+\b)/g;
 const OPERA_EXT = /\b\w+(\w(\())/g;
 const prefixOperators = (str) => str.replace(OPERA_EXT, (o) => `_.${o}`);
-const strip = (p) => p.replace(/"/g, '');
+const strip = (p) => (p.includes('.') ? p.replace(/"|'/g, '') : p.replace(/"/g, ''));
+//const strip = (p) => p.replace(/"/g, '');
 
 //**************************************************************
 // Wrap a param in a try-catch to handle undefined params
@@ -23,23 +24,24 @@ const makeSafeParam = (param, undef) => {
   }
 
   const wrap = `(() => {
+    const tryObj = () =>{
       try {
-        return ${param} !== undefined ? ${param} : ${undef};
-      } catch (e) {
-        try {
-          for(const arg of args){
-            if(arg.get) return arg.get("${strip(param)}")
-            if(typeof arg === "object" && arg["${strip(param)}"] !== undefined) return arg["${strip(
-    param
-  )}"];
-          }
-        } catch(e){
-          return ${undef};
+        const key = "${strip(param)}";
+        for(const arg of args){
+          if(arg.get) return arg.get(key);
+          if(typeof arg === "object" && arg[key] !== undefined) return arg[key];
         }
+      } catch(e){}
+    }
 
-        return ${undef};
-      }
-    })()`;
+    try {
+      const objValue = tryObj();
+      if(objValue !== undefined) return objValue;
+      return ${param} ?? ${undef};
+    } catch (e) {
+      return ${undef};
+    }
+  })()`;
 
   return wrap;
 };
@@ -86,16 +88,17 @@ function evaluateFactory({
             .replace(/ (OR|or) /g, ' || ')
             .replace(/(NOT|not) /g, '!')
         : condition,
-      undef
+      undef,
     );
 
     args = makeSafeArgs(args);
     const argomenti = multipleParams ? args : args[0] || {};
     const input = multipleParams
       ? 'args, _'
-      : `{${(argomenti.keys ? argomenti.keys() : Object.keys(argomenti)).map((k) => k).join(',')}}`;
+      : `{${(argomenti.keys ? argomenti.keys() : Object.keys(argomenti)).join(',')}}`;
 
     if (condition === '*') condition = 'true';
+
     const func = new Function(input, `${operatorsScoped} \n\n return ${condition}`);
     return func(argomenti, operators);
   };

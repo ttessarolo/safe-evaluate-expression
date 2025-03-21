@@ -1,5 +1,6 @@
 function getValue(data) {
-  return data.value;
+  if (!data.value.includes) return data.value;
+  return data.value.includes('.') ? `'${data.value}'` : data.value;
 }
 
 function complexToBasic(rule) {

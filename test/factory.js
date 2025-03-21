@@ -2,7 +2,11 @@ const test = require('ava');
 const { factory, operators } = require('../');
 const evaluate = factory({ operators, multipleParams: true, translateLogical: true });
 
-const metadata = { x: 1.1, y: 2, now: '2020-11-07T23:00:00.000Zรท2020-11-14T22:59:59.000Z' };
+const metadata = {
+  x: 1.1,
+  y: 2,
+  now: '2020-11-07T23:00:00.000Zรท2020-11-14T22:59:59.000Z',
+};
 const list = { k: 3, z: 4 };
 const map = new Map([['pi', 3.14]]);
 
@@ -68,8 +72,8 @@ test('isLower(x,z) AND isLower(k,y) OR (isLower(z,P) AND NOT isLower(P,k)))', (t
     evaluate(
       `(isLower(x,z) AND isLower(k,y) OR (isLower(z,P) AND NOT isLower(P,k)))`,
       metadata,
-      list
-    )
+      list,
+    ),
   ));
 test(`isLower(z,pi)`, (t) => t.false(evaluate(`isLower(z,pi)`, metadata, list, map)));
 
@@ -108,4 +112,27 @@ test('includes with mulit-trail', (t) => {
   };
 
   t.true(evaluate(condition, { 'social-news-all': '["a"]' }, { ciao: 'mamma' }));
+});
+
+test('dotted condition', (t) => {
+  const condition = {
+    and: [
+      {
+        operator: 'sizeGreater',
+        values: [
+          {
+            type: 'metadata',
+            value: 'k',
+          },
+          {
+            value: '"4"',
+            type: 'number',
+          },
+        ],
+        id: '2xSC4zIAh-',
+      },
+    ],
+  };
+
+  t.true(evaluate(condition, { k: [1, 2, 3, 4, 5, 6] }, { ciao: 'mamma' }));
 });

@@ -6,7 +6,7 @@ heading are saved on the object directly.
 ## Usage
 
 Consider an ini-file `config.ini` that looks like this:
-
+```ini
     ; this comment is being ignored
     scope = global
 
@@ -20,9 +20,11 @@ Consider an ini-file `config.ini` that looks like this:
     array[] = first value
     array[] = second value
     array[] = third value
+```
 
 You can read, manipulate and write the ini-file like so:
 
+```js
     var fs = require('fs')
       , ini = require('ini')
 
@@ -35,10 +37,12 @@ You can read, manipulate and write the ini-file like so:
     config.paths.default.array.push('fourth value')
 
     fs.writeFileSync('./config_modified.ini', ini.stringify(config, { section: 'section' }))
+```
 
 This will result in a file called `config_modified.ini` being written
 to the filesystem with the following content:
 
+```ini
     [section]
     scope=local
     [section.database]
@@ -51,7 +55,7 @@ to the filesystem with the following content:
     array[]=second value
     array[]=third value
     array[]=fourth value
-
+```
 
 ## API
 
@@ -72,12 +76,29 @@ prepended to all sub-sections, see the usage example above.
 
 The `options` object may contain the following:
 
-* `section` A string which will be the first `section` in the encoded
+* `align` Boolean to specify whether to align the `=` characters for
+  each section. This option will automatically enable `whitespace`.
+  Defaults to `false`.
+* `section` String which will be the first `section` in the encoded
   ini data.  Defaults to none.
+* `sort` Boolean to specify if all keys in each section, as well as
+  all sections, will be alphabetically sorted.  Defaults to `false`.
 * `whitespace` Boolean to specify whether to put whitespace around the
   `=` character.  By default, whitespace is omitted, to be friendly to
   some persnickety old parsers that don't tolerate it well.  But some
   find that it's more human-readable and pretty with the whitespace.
+  Defaults to `false`.
+* `newline` Boolean to specify whether to put an additional newline
+  after a section header. Some INI file parsers (for example the TOSHIBA
+  FlashAir one) need this to parse the file successfully.  By default,
+  the additional newline is omitted.
+* `platform` String to define which platform this INI file is expected
+  to be used with: when `platform` is `win32`, line terminations are
+  CR+LF, for other platforms line termination is LF.  By default, the
+  current platform name is used.
+* `bracketedArrays` Boolean to specify whether array values are appended
+  with `[]`.  By default this is true but there are some ini parsers
+  that instead treat duplicate names as arrays.
 
 For backwards compatibility reasons, if a `string` options is passed
 in, then it is assumed to be the `section` value.
@@ -91,7 +112,9 @@ Alias for `encode(object, [options])`
 Escapes the string `val` such that it is safe to be used as a key or
 value in an ini-file. Basically escapes quotes. For example
 
+```js
     ini.safe('"unsafe string"')
+```
 
 would result in
 
