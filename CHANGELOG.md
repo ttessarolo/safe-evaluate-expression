@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.4](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.7.3%0Dv1.7.4) (2025-03-21)
+
+
+### Bug Fixes
+
+* dotted key ([b75e2ba](https://github.com/ttessarolo/safe-evaluate-expression/commits/b75e2ba880a2072fd322ff24183e3ae8374f91f5))
+
 ### [1.7.3](https://bitbucket.org/ttessarolo/safe-evaluate-expression/branches/compare/v1.7.2%0Dv1.7.3) (2022-07-03)
 
 
