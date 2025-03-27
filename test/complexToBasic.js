@@ -146,6 +146,25 @@ c13 = {
   ],
 };
 
+const dotted = {
+  and: [
+    {
+      operator: 'greaterThan',
+      values: [
+        {
+          type: 'metadata',
+          value: 'video_watched_w_ts.id',
+        },
+        {
+          value: '"5"',
+          type: 'number',
+        },
+      ],
+      id: 'FmcXApH2u9',
+    },
+  ],
+};
+
 const b10 = `(((isEqual(dayOfTheWeek, "Lun") && (isGreater(hourOfDay, 10) && isLess(hourOfDay, 12))) || (isEqual(dayOfTheWeek, "Ven") && (isGreater(hourOfDay, 20) && isLess(hourOfDay, 23)))) && isEqual(recommendable, true))`;
 const c11 = { and: [{ operator: '*' }] };
 const b11 = `*`;
@@ -170,4 +189,10 @@ test('test and or condition', (t) => {
 test('test one value condition', (t) => {
   const result = complexToBasic(c13);
   t.deepEqual(result, b13);
+});
+
+test('test dotted', (t) => {
+  const result = complexToBasic(dotted);
+  console.log(result);
+  t.deepEqual(result, `(greaterThan('video_watched_w_ts.id', "5"))`);
 });

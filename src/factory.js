@@ -74,7 +74,8 @@ function evaluateFactory({
   undef,
 } = {}) {
   return (expression, ...args) => {
-    const exp = typeof expression === 'string' ? expression : complexToBasic(expression);
+    const isBasic = typeof expression === 'string';
+    const exp = isBasic ? expression : complexToBasic(expression);
     let operatorsScoped = '';
     let condition = exp;
 
